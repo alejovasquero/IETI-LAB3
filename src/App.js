@@ -1,25 +1,43 @@
 import logo from './logo.svg';
 import './App.css';
+import React from 'react';
+import Login from './users/Login.js';
+import Tasks from './tasks/Tasks.js'
+import ReactDOM from "react-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+const LoginView = () => (
+  <Login />
+);
+
+const TasksView = () => (
+  <Tasks />
+);
+
+class App extends React.Component {
+
+
+  constructor(props) {
+    super(props);
+
+  }
+
+  render() {
+    return (
+      <div className="App">
+        <Router>
+
+          <Switch>
+            <Route exact path="/" component={LoginView} />
+            <Route exact path="/tasks" component={TasksView} />
+          </Switch>
+
+        </Router>
+
+      </div>
+    );
+  }
 }
 
 export default App;
