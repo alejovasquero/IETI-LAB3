@@ -1,3 +1,9 @@
+[![Deployed to Heroku](https://www.herokucdn.com/deploy/button.png)](https://task-planner-app-david.herokuapp.com/)
+
+[![Deploy To Azure](https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/1-CONTRIBUTION-GUIDE/images/deploytoazure.svg?sanitize=true)](https://ietilab3-david.azurewebsites.net/)
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
