@@ -8,9 +8,22 @@ class Login extends React.Component {
 
     constructor(props) {
         super(props);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-
+    handleSubmit(e, v){
+        console.log(e.target[0].value);
+        console.log(e.target[1].value);
+        const usernameLocal = localStorage.getItem('username');
+        const passwordLocal = localStorage.getItem('password');
+        const username = e.target[0].value;
+        const password = e.target[1].value;
+        if(username === usernameLocal && password === passwordLocal){
+            localStorage.setItem('isLoggedIn', true);
+        } else {
+            localStorage.setItem('isLoggedIn', false);
+        }
+    }
 
     render() {
 
@@ -26,7 +39,7 @@ class Login extends React.Component {
                                 title="Task Planner"
                                 component="img"
                             />
-                            <form action="/tasks">
+                            <form action="/tasks" onSubmit={this.handleSubmit}>
                                 <div>
                                     <Grid container
                                         direction="column"
@@ -53,13 +66,14 @@ class Login extends React.Component {
                                             </Button>
                                         </Grid>
 
-                                        {/*<Link>Create Account</Link>*/}
+                                        
 
                                     </Grid>
 
                                 </div>
 
                             </form>
+                            <Button>Create Account</Button>
 
 
 

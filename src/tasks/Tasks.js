@@ -3,7 +3,7 @@ import Drawer from '@material-ui/core/Drawer';
 import { Avatar, Card, CardHeader, CssBaseline, Fab, Grid, Dialog, DialogTitle, TextField, Divider, DialogContent, InputLabel } from '@material-ui/core';
 import CardContent from '@material-ui/core/CardContent';
 import "./Tasks.css"
-import LoginPhoto from "../images/tasklogo.png";
+
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -13,6 +13,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import AddIcon from '@material-ui/icons/Add';
 import TaskCreator from './TaskCreator';
 import TaskCard from './TaskCard';
+import LeftDrawer from './LeftDrawer';
 
 
 class Tasks extends React.Component {
@@ -29,6 +30,7 @@ class Tasks extends React.Component {
     }
 
     toggleDrawer = (open) => (event) => {
+        console.log(open);
         if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
             return;
         }
@@ -53,7 +55,7 @@ class Tasks extends React.Component {
                 email: event.target[2].value
             },
             status: event.target[3].value,
-            dueDate: Date.now()
+            dueDate: new Date()
 
         }
         this.setState(prevState => {
@@ -111,21 +113,7 @@ class Tasks extends React.Component {
                     onClose={this.handleDialogClose}>
                 </TaskCreator>
 
-                <React.Fragment>
-                    <Drawer open={this.state.drawerOpen} onClose={this.toggleDrawer(false)}>
-                        <Card className="userSection">
-                            <CardContent>
-                                <Grid>
-
-                                    <Avatar alt="David Vasquez" src={LoginPhoto} />
-                                    <IconButton onClick={this.handleDrawerClose}>
-                                        <ChevronLeftIcon />
-                                    </IconButton>
-                                </Grid>
-                            </CardContent>
-                        </Card>
-                    </Drawer>
-                </React.Fragment>
+                <LeftDrawer open={this.state.drawerOpen} toggleDrawer={this.toggleDrawer}></LeftDrawer>
 
 
             </div>

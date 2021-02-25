@@ -1,6 +1,5 @@
 import React from 'react';
-import './TaskCard.css'
-import { Card } from '@material-ui/core';
+import { Card, Grid, withStyles } from '@material-ui/core';
 import CardContent from '@material-ui/core/CardContent';
 import "./Tasks.css"
 import Typography from '@material-ui/core/Typography';
@@ -8,6 +7,14 @@ import CheckIcon from '@material-ui/icons/Check';
 import ErrorIcon from '@material-ui/icons/Error';
 import PlayCircleFilledWhiteIcon from '@material-ui/icons/PlayCircleFilledWhite';
 
+
+const styles = (theme) => ({
+
+    root: {
+        margin: "auto",
+    }
+
+});
 
 class TaskCard extends React.Component {
 
@@ -18,28 +25,45 @@ class TaskCard extends React.Component {
 
     render() {
 
+        const { classes } = this.props;
+
         return (
-            <div>
-                <Card className="mainCard">
-                    <div className="container">
-                        <CardContent className="content">
-                            <Typography color="textPrimary" gutterBottom>
-                                {this.props.task.description}
-                            </Typography>
+            <div className={classes.root}>
+                <Card className="mainCard" variant="outlined">
+                    <Grid
+                        container
+                        direction="row"
+                        justify="center"
+                        alignItems="center"
+                    >
 
-                            <Typography color="textSecondary" gutterBottom>
-                                {this.props.task.status}
-                            </Typography>
+                        <Grid>
+                            <div className="container">
+                                <CardContent className="content">
+                                    <Typography color="textPrimary" gutterBottom>
+                                        {this.props.task.description}
+                                    </Typography>
 
-                            <Typography color="textSecondary" gutterBottom>
-                                {this.props.task.responsible.name}
-                            </Typography>
-                            <Typography color="textSecondary" gutterBottom>
-                                {new Date(this.props.task.duaDate).toString()}
-                            </Typography>
-                        </CardContent>
-                    </div>
-                    {this.props.task.status === "To Do" ? <ErrorIcon/> : this.props.task.status === "Ready" ? <CheckIcon/> : <PlayCircleFilledWhiteIcon/>}
+                                    <Typography color="textSecondary" gutterBottom>
+                                        {this.props.task.status}
+                                    </Typography>
+
+                                    <Typography color="textSecondary" gutterBottom>
+                                        {this.props.task.responsible.name}
+                                    </Typography>
+                                    <Typography color="textSecondary" gutterBottom>
+                                        {this.props.task.dueDate.toLocaleDateString("en-US")}
+                                    </Typography>
+                                </CardContent>
+                            </div>
+
+                        </Grid>
+                        <Grid>
+                            {this.props.task.status === "To Do" ? <ErrorIcon /> : this.props.task.status === "Ready" ? <CheckIcon /> : <PlayCircleFilledWhiteIcon />}
+                        </Grid>
+
+
+                    </Grid>
                 </Card>
             </div>
         );
@@ -47,4 +71,4 @@ class TaskCard extends React.Component {
 }
 
 
-export default TaskCard;
+export default withStyles(styles)(TaskCard);

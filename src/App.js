@@ -20,7 +20,31 @@ class App extends React.Component {
 
   constructor(props) {
     super(props);
+    this.state = { iisLoggedIn: false };
+    this.saveCredentials = this.saveCredentials.bind(this);
+    this.checkAuthentication = this.checkAuthentication.bind(this);
+  }
 
+  componentDidMount() {
+    this.saveCredentials();
+    this.checkAuthentication();
+  }
+
+  saveCredentials() {
+    localStorage.setItem('username', 'david');
+    localStorage.setItem('password', 'vasquez');
+  }
+
+  checkAuthentication() {
+    const loggedIn = localStorage.getItem('isLoggedIn');
+    if (loggedIn) {
+      this.setState({
+        isLoggedIn:
+          JSON.parse(loggedIn) === true ? true : false
+      }, () => { console.log(this.state.isLoggedIn) });
+    } else {
+      this.setState({ isLoggedIn: false });
+    }
   }
 
   render() {
@@ -30,7 +54,12 @@ class App extends React.Component {
 
           <Switch>
             <Route exact path="/" component={LoginView} />
-            <Route exact path="/tasks" component={TasksView} />
+            {
+
+              this.state.isLoggedIn &&
+              <Route exact path="/tasks" component={TasksView} />
+            }
+
           </Switch>
 
         </Router>
